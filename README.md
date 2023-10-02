@@ -47,9 +47,18 @@ Having all the resources installed, run the command in a terminal from the root 
 In terminal show this:
 
 ```console
-[+] Running 2/2
- ✔ Network dotnet-rate-limiter_default  Created                0.8s
- ✔ Container rate_limiter_app           Started                1.2s
+[+] Running 11/11
+ ✔ Network dotnet-rabbitmq_amqp_network   Created                                           0.9s
+ ✔ Volume "dotnet-rabbitmq_mysql-data"    Created                                           0.0s
+ ✔ Container mysqldb                      Started                                           8.4s
+ ✔ Container zookeeper                    Started                                           8.4s
+ ✔ Container rabbitmq                     Started                                           9.7s
+ ✔ Container dotnet_consumer_masstransit  Started                                           11.2s
+ ✔ Container dotnet_consumer_rabbit       Started                                           10.8s
+ ✔ Container kafka                        Started                                           8.0s
+ ✔ Container dotnet_consumer_kafka        Started                                           9.9s
+ ✔ Container dotnet-rabbitmq-kafdrop-1    Started                                           10.4s
+ ✔ Container dotnet_producer              Started                                           11.0s
 ```
 
 After this, access the link below:
