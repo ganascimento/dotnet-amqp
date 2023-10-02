@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Amqp.Producer", "Dotnet.Amqp.Producer\Dotnet.Amqp.Producer.csproj", "{FCBA5C07-424D-4394-AF8B-7C3A44B5622C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Amqp.Core", "Dotnet.Amqp.Core\Dotnet.Amqp.Core.csproj", "{AC1A9D98-E0E9-4CCD-962C-756B5F81E091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Amqp.Consumer.RabbitMq", "Dotnet.Amqp.Consumer.RabbitMq\Dotnet.Amqp.Consumer.RabbitMq.csproj", "{819163AF-EBC2-4B26-B2E4-F65A15F971C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Amqp.Consumer.MassTransit", "Dotnet.Amqp.Consumer.MassTransit\Dotnet.Amqp.Consumer.MassTransit.csproj", "{496F591A-E64C-4A83-83DA-DAE84459F092}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Amqp.Consumer.Kafka", "Dotnet.Amqp.Consumer.Kafka\Dotnet.Amqp.Consumer.Kafka.csproj", "{3098A8E3-95CB-49D9-ABC3-B7788236798B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCBA5C07-424D-4394-AF8B-7C3A44B5622C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBA5C07-424D-4394-AF8B-7C3A44B5622C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBA5C07-424D-4394-AF8B-7C3A44B5622C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBA5C07-424D-4394-AF8B-7C3A44B5622C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC1A9D98-E0E9-4CCD-962C-756B5F81E091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC1A9D98-E0E9-4CCD-962C-756B5F81E091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC1A9D98-E0E9-4CCD-962C-756B5F81E091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC1A9D98-E0E9-4CCD-962C-756B5F81E091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{819163AF-EBC2-4B26-B2E4-F65A15F971C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819163AF-EBC2-4B26-B2E4-F65A15F971C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819163AF-EBC2-4B26-B2E4-F65A15F971C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819163AF-EBC2-4B26-B2E4-F65A15F971C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496F591A-E64C-4A83-83DA-DAE84459F092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496F591A-E64C-4A83-83DA-DAE84459F092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496F591A-E64C-4A83-83DA-DAE84459F092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496F591A-E64C-4A83-83DA-DAE84459F092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3098A8E3-95CB-49D9-ABC3-B7788236798B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3098A8E3-95CB-49D9-ABC3-B7788236798B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3098A8E3-95CB-49D9-ABC3-B7788236798B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3098A8E3-95CB-49D9-ABC3-B7788236798B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /App
+COPY ["Dotnet.Amqp.Consumer.RabbitMq", "Dotnet.Amqp.Consumer.RabbitMq/"]
+COPY ["Dotnet.Amqp.Core", "Dotnet.Amqp.Core/"]
+RUN dotnet restore "Dotnet.Amqp.Consumer.RabbitMq"
+RUN dotnet publish -c Release -o out "Dotnet.Amqp.Consumer.RabbitMq"
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /App
+COPY --from=build /App/out .
+ENTRYPOINT ["dotnet", "Dotnet.Amqp.Consumer.RabbitMq.dll"]

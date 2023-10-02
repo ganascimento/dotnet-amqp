@@ -1,0 +1,132 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: ./src
+      dockerfile: Dockerfile_Producer
+    container_name: dotnet_producer
+    ports:
+      - "5000:80"
+    environment:
+      ConnectionStrings__DefaultConnection: server=mysqldb;port=3306;database=amqpdbtest;uid=root;password=root@123
+      ConnectionStrings__RabbitMQ: amqp://admin:admin123@rabbitmq:5672
+      ConnectionStrings__Kafka: kafka:9092
+    networks:
+      - amqp_network
+    depends_on:
+      - mysqldb
+      - kafka
+      - rabbitmq
+
+  rabbit_consumer:
+    build:
+      context: ./src
+      dockerfile: Dockerfile_Consumer_Rabbit
+    container_name: dotnet_consumer_rabbit
+    environment:
+      ConnectionStrings__DefaultConnection: server=mysqldb;port=3306;database=amqpdbtest;uid=root;password=root@123
+      ConnectionStrings__RabbitMQ: amqp://admin:admin123@rabbitmq:5672
+    networks:
+      - amqp_network
+    depends_on:
+      - mysqldb
+      - rabbitmq
+
+  masstransit_consumer:
+    build:
+      context: ./src
+      dockerfile: Dockerfile_Consumer_MassTransit
+    container_name: dotnet_consumer_masstransit
+    environment:
+      ConnectionStrings__DefaultConnection: server=mysqldb;port=3306;database=amqpdbtest;uid=root;password=root@123
+      ConnectionStrings__RabbitMQ: amqp://admin:admin123@rabbitmq:5672
+    networks:
+      - amqp_network
+    depends_on:
+      - mysqldb
+      - rabbitmq
+
+  kafka_consumer:
+    build:
+      context: ./src
+      dockerfile: Dockerfile_Consumer_Kafka
+    container_name: dotnet_consumer_kafka
+    environment:
+      ConnectionStrings__DefaultConnection: server=mysqldb;port=3306;database=amqpdbtest;uid=root;password=root@123
+      ConnectionStrings__Kafka: kafka:9092
+    networks:
+      - amqp_network
+    depends_on:
+      - mysqldb
+      - kafka
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "admin"
+      RABBITMQ_DEFAULT_PASS: "admin123"
+    networks:
+      - amqp_network
+
+  mysqldb:
+    image: mysql:latest
+    container_name: mysqldb
+    environment:
+      MYSQL_ROOT_PASSWORD: "root@123"
+      MYSQL_DATABASE: "amqpdbtest"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - amqp_network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - amqp_network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    networks:
+      - amqp_network
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop:latest
+    depends_on:
+      - kafka
+    ports:
+      - 19000:9000
+    environment:
+      KAFKA_BROKERCONNECT: kafka:29092
+    networks:
+      - amqp_network
+
+volumes:
+  mysql-data:
+
+networks:
+  amqp_network:

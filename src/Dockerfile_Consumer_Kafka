@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /App
+COPY ["Dotnet.Amqp.Consumer.Kafka", "Dotnet.Amqp.Consumer.Kafka/"]
+COPY ["Dotnet.Amqp.Core", "Dotnet.Amqp.Core/"]
+RUN dotnet restore "Dotnet.Amqp.Consumer.Kafka"
+RUN dotnet publish -c Release -o out "Dotnet.Amqp.Consumer.Kafka"
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /App
+COPY --from=build /App/out .
+ENTRYPOINT ["dotnet", "Dotnet.Amqp.Consumer.Kafka.dll"]

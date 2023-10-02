@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /App
+COPY ["Dotnet.Amqp.Producer", "Dotnet.Amqp.Producer/"]
+COPY ["Dotnet.Amqp.Core", "Dotnet.Amqp.Core/"]
+RUN dotnet restore "Dotnet.Amqp.Producer"
+RUN dotnet publish -c Release -o out "Dotnet.Amqp.Producer"
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /App
+COPY --from=build /App/out .
+EXPOSE 80
+ENTRYPOINT ["dotnet", "Dotnet.Amqp.Producer.dll"]
